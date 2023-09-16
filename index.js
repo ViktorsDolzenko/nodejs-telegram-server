@@ -36,13 +36,16 @@ app.post('/web-data', async (req, res) => {
         const title = item.title;
         const quantity = item.quantity;
 
-        if (uniqueItems[title]) {
+        if (title in uniqueItems) {
             uniqueItems[title].quantity += quantity;
         } else {
             uniqueItems[title] = { title, quantity };
         }
     });
-    console.log(uniqueItems);
+
+    const result = Object.values(uniqueItems);
+
+    console.log(result);
     try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
