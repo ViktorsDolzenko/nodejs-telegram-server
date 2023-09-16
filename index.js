@@ -19,7 +19,7 @@ bot.on('message', async (msg) => {
         console.log('start')
         await bot.sendMessage(chatId, 'Ниже появится кнопка, выбери блюдо', {
             reply_markup: {
-                keyboard: [
+                inline_keyboard: [
                     [{text: 'Выбрать блюдо', web_app: {url: webAppUrl}}]
                 ]
             }
