@@ -16,6 +16,7 @@ bot.on('message', async (msg) => {
     const text = msg.text;
 
     if(text === '/start') {
+        console.log('start')
         await bot.sendMessage(chatId, 'Ниже появится кнопка, выбери блюдо', {
             reply_markup: {
                 keyboard: [
@@ -28,6 +29,7 @@ bot.on('message', async (msg) => {
 
 app.post('/web-data', async (req, res) => {
     const {queryId, products = []} = req.body;
+    console.log(products, queryId)
     try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
