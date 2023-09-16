@@ -30,7 +30,7 @@ bot.on('message', async (msg) => {
 
 app.post('/web-data', async (req, res) => {
     const {queryId, products = []} = req.body;
-    console.log('products', products)
+    const allProducts = products.map((item) => item.products);
     try {
         console.log(queryId)
         await bot.answerWebAppQuery(queryId, {
@@ -39,7 +39,7 @@ app.post('/web-data', async (req, res) => {
             title: 'Cписок покупок',
             input_message_content: {
                 message_text: `${products.map((item) => `Блюдо: ${item.title}\n\n Список продуктов: ${item.products.map((product) => product).join(', ')}\n\n Доп инфо: ${item.description}`).join('\n----------\n')}\n\n\n\n
-                ${products.map((allProducts) => _.uniq(allProducts)).join(', ')}`
+                ${allProducts.map((productX) => _.uniq(productX)).join(', ')}`
             }
         })
         console.log(res);
