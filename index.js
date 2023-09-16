@@ -33,9 +33,11 @@ app.post('/web-data', async (req, res) => {
     const allProducts = products.map((item) => item.products);
     const getAllProducts = allProducts.map((item) => item.products).flat()
     let uniqueItems = {};
+    console.log('lol': getAllProducts)
     getAllProducts.forEach(item => {
-        const title = item?.title;
-        const quantity = Number(item?.quantity);
+        console.log(item);
+        const title = item.title;
+        const quantity = Number(item.quantity);
 
         if (title in uniqueItems) {
             uniqueItems[title].quantity += quantity;
