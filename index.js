@@ -31,15 +31,11 @@ bot.on('message', async (msg) => {
 app.post('/web-data', async (req, res) => {
     const {queryId, products = []} = req.body;
     const allProducts = products.map((item) => item.products);
-    let mergedArray = [];
-
-    for (let i = 0; i < allProducts.length; i++) {
-        mergedArray = allProducts.concat(allProducts[i]);
-    }
-    const uniqueItems = {};
-    mergedArray.forEach(item => {
+    const getAllProducts = allProducts.map((item) => item.products).flat()
+    let uniqueItems = {};
+    getAllProducts.forEach(item => {
         const title = item.title;
-        const quantity = item.quantity;
+        const quantity = Number(item.quantity);
 
         if (title in uniqueItems) {
             uniqueItems[title].quantity += quantity;
@@ -47,10 +43,6 @@ app.post('/web-data', async (req, res) => {
             uniqueItems[title] = { title, quantity };
         }
     });
-
-    const result = Object.values(uniqueItems);
-
-    console.log(result);
     try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
