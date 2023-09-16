@@ -29,14 +29,15 @@ bot.on('message', async (msg) => {
 
 app.post('/web-data', async (req, res) => {
     const {queryId, products = []} = req.body;
-    console.log('test',products, queryId)
+    console.log('products: ',products)
     try {
+        console.log(queryId)
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
             title: 'Cписок покупок',
             input_message_content: {
-                message_text: `${products.map(item => `Блюдо ${item.title} Продукты: ${item.products.map((item => item.join(',')))}`)}`
+                message_text: `test`
             }
         })
         return res.status(200).json({});
