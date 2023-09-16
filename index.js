@@ -38,7 +38,7 @@ app.post('/web-data', async (req, res) => {
             id: queryId,
             title: 'Cписок покупок',
             input_message_content: {
-                message_text: `${products.map((item) => `Блюдо: ${item.title}\n\n Список продуктов: ${item.products.map((product) => product).join(', ')}\n\n Доп инфо: ${item.description}`).join('\n----------\n')}\n\n\n\n Продукты которые нужно купить:\n        ${allProducts.map((productX) => _.uniq(productX)).join(', ')}`
+                message_text: `${products.map((item) => `Блюдо: ${item.title}\n\n Список продуктов: ${item.products.map((product) => product).join(', ')}\n\n Доп инфо: ${item.description}`).join('\n----------\n')}\n\n\n\n Продукты которые нужно купить:\n\n   ${allProducts.map((productX) => _.uniq(productX)).join(', ')}`
             }
         })
         console.log(res);
