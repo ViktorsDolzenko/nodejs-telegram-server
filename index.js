@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
+const _ = require('lodash')
 
 const token = '5887076660:AAErITt-OyVu620SYG1R8I8ffOp_kyYPhi8';
 const webAppUrl = 'https://bespoke-blini-ca4c6a.netlify.app';
@@ -37,7 +38,8 @@ app.post('/web-data', async (req, res) => {
             id: queryId,
             title: 'Cписок покупок',
             input_message_content: {
-                message_text: `${products.map((item) => `Блюдо: ${item.title}\n\n Список продуктов: ${item.products.map((product) => product).join(' ,')}\n\n Доп инфо: ${item.description}`).join('\n----------\n')}`
+                message_text: `${products.map((item) => `Блюдо: ${item.title}\n\n Список продуктов: ${item.products.map((product) => product).join(', ')}\n\n Доп инфо: ${item.description}`).join('\n----------\n')}\n\n\n\n
+                ${products.map((allProducts) => _.uniq(allProducts)).join(', ')}`
             }
         })
         console.log(res);
