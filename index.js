@@ -42,8 +42,7 @@ app.post('/web-data', async (req, res) => {
             uniqueItems[title] = { title, quantity };
         }
     });
-
-// Преобразуем объект обратно в массив
+    console.log(uniqueItems);
     try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
