@@ -31,25 +31,26 @@ bot.on('message', async (msg) => {
 app.post('/web-data', async (req, res) => {
     const {queryId, products = []} = req.body;
     const allProducts = products.map((item) => item.products);
-    // const getAllProducts = allProducts.map((item) => item.products).flat()
-    // // let uniqueItems = {};
-    // // getAllProducts.forEach(item => {
-    // //     const title = item.title;
-    // //     const quantity = Number(item.quantity);
-    // //
-    // //     if (title in uniqueItems) {
-    // //         uniqueItems[title].quantity += quantity;
-    // //     } else {
-    // //         uniqueItems[title] = { title, quantity };
-    // //     }
-    // // });
+    const getAllProducts = allProducts.map((item) => item.products).flat()
+    let uniqueItems = {};
+    getAllProducts.forEach(item => {
+        const title = item.title;
+        const quantity = Number(item.quantity);
+
+        if (title in uniqueItems) {
+            uniqueItems[title].quantity += quantity;
+        } else {
+            uniqueItems[title] = { title, quantity };
+        }
+    });
+    console.log(uniqueItems);
     try {
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
             title: 'Cписок покупок',
             input_message_content: {
-                message_text: `${products.map((item) => `Блюдо: ${item.title}\n\n Список продуктов: ${item.products.map((product) => `${product.title +  ' ' + product.quantity}`).join(', ')}\n\n Доп инфо: ${item.description}`).join('\n----------\n')}\n\n\n\n Продукты которые нужно купить:\n\n  ${allProducts.map((item => `${item.title + ' ' + item.quantity} (г/шт)`))}`
+                message_text: `${products.map((item) => `Блюдо: ${item.title}\n\n Список продуктов: ${item.products.map((product) => `${product.title +  ' ' + product.quantity}`).join(', ')}\n\n Доп инфо: ${item.description}`).join('\n----------\n')}\n\n\n\n Продукты которые нужно купить:\n\n  ${uniqueItems.map((item => `${item.title + ' ' + item.quantity} (г/шт)`))}`
             }
         })
         return res.status(200).json({});
