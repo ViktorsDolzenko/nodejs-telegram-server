@@ -37,7 +37,7 @@ app.post('/web-data', async (req, res) => {
             id: queryId,
             title: 'Cписок покупок',
             input_message_content: {
-                message_text: `test`
+                message_text: products.map((item) => `Блюдо: ${item.title} Список продуктов: ${item.products} Доп инфо: ${item.description}`)
             }
         })
         console.log(res);
