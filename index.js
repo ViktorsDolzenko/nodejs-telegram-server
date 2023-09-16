@@ -29,9 +29,9 @@ bot.on('message', async (msg) => {
 
 app.post('/web-data', async (req, res) => {
     const {queryId, products = []} = req.body;
-    console.log('products: ',products)
+    console.log('products', products)
     try {
-        console.log('queryId:',queryId)
+        console.log(queryId)
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
@@ -40,7 +40,7 @@ app.post('/web-data', async (req, res) => {
                 message_text: `test`
             }
         })
-        console.log(res)
+        console.log(res);
         return res.status(200).json({});
     } catch (e) {
         return res.status(500).json({})
