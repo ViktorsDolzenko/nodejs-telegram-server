@@ -31,7 +31,7 @@ app.post('/web-data', async (req, res) => {
     const {queryId, products = []} = req.body;
     console.log('products: ',products)
     try {
-        console.log('queryId:' queryId)
+        console.log('queryId:',queryId)
         await bot.answerWebAppQuery(queryId, {
             type: 'article',
             id: queryId,
