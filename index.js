@@ -31,9 +31,13 @@ bot.on('message', async (msg) => {
 app.post('/web-data', async (req, res) => {
     const {queryId, products = []} = req.body;
     const allProducts = products.map((item) => item.products);
+    let mergedArray = [];
+
+    for (let i = 0; i < allProducts.length; i++) {
+        mergedArray = allProducts.concat(allProducts[i]);
+    }
     const uniqueItems = {};
-    console.log('products',allProducts)
-    allProducts.forEach(item => {
+    mergedArray.forEach(item => {
         const title = item.title;
         const quantity = item.quantity;
 
