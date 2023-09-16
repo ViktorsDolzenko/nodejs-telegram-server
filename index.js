@@ -32,6 +32,7 @@ app.post('/web-data', async (req, res) => {
     const {queryId, products = []} = req.body;
     const allProducts = products.map((item) => item.products);
     const uniqueItems = {};
+    console.log('products',allProducts)
     allProducts.forEach(item => {
         const title = item.title;
         const quantity = item.quantity;
