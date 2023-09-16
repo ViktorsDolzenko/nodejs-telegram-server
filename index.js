@@ -49,7 +49,7 @@ app.post('/web-data', async (req, res) => {
             id: queryId,
             title: 'Cписок покупок',
             input_message_content: {
-                message_text: `test`
+                message_text: 'TEST'
             }
         })
         return res.status(200).json({});
