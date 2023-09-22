@@ -2,6 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const cors = require('cors');
 const _ = require('lodash')
+const axios = require("axios");
 
 const token = '5887076660:AAErITt-OyVu620SYG1R8I8ffOp_kyYPhi8';
 const webAppUrl = 'https://bespoke-blini-ca4c6a.netlify.app';
@@ -17,13 +18,23 @@ bot.on('message', async (msg) => {
     const text = msg.text;
 
     if(text === '/start') {
-        console.log('start')
         await bot.sendMessage(chatId, 'Ниже появится кнопка, выбери блюдо', {
             reply_markup: {
                 inline_keyboard: [
                     [{text: 'Выбрать блюдо', web_app: {url: webAppUrl}}]
                 ]
             }
+        })
+    }
+
+    if(text === '/weather') {
+        await axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/5day/227285?apikey=GWz15QRQgUKBaAsPLhGdNnAikcCp69F1&language=ru-ru&metric=true').then((data)=> {
+            console.log(data)
+            bot.sendMessage(chatId, 'Погода в Vecumnieki', {
+                reply_markup: {
+                  text: 'test'
+                }
+            })
         })
     }
 });
