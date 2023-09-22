@@ -15,8 +15,9 @@ app.use(cors());
 
 
 const getDate = (myDate) => {
-    const date = myDate.fromISO("2010-10-22T21:38:00", {locale: 'ru-RU'})
-    return date.toLocaleString(DateTime.DATETIME_MED);
+    return DateTime.fromISO(myDate)
+        .setLocale('ru-RU')
+        .toLocaleString('datetimeFull')
 }
 
 
@@ -36,7 +37,6 @@ bot.on('message', async (msg) => {
 
     if(text === '/weather') {
         await axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/5day/227285?apikey=GWz15QRQgUKBaAsPLhGdNnAikcCp69F1&language=ru-ru&metric=true').then(({data})=> {
-
             bot.sendMessage(chatId, `${data.DailyForecasts.map((item) => `${getDate(item.Date)}`).join('\n\n')}`)
         })
     }
