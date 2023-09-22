@@ -16,7 +16,7 @@ app.use(cors());
 
 
 const getDate = (myDate) => {
-    return DateTime.fromISO(myDate, {locale: 'ru'}).toLocaleString(DateTime.DATETIME_FULL);;
+    return DateTime.fromISO(myDate, {locale: 'ru'}).toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);;
 }
 
 
