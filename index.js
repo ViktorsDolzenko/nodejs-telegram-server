@@ -16,7 +16,7 @@ app.use(cors());
 
 
 const getDate = (myDate) => {
-    return Interval.fromISO(myDate).toLocaleString(DateTime.DATE_FULL, { locale: 'ru' });
+    return DateTime.fromISO(myDate, {locale: 'ru'});
 }
 
 
