@@ -18,7 +18,7 @@ app.use(cors());
 const getDate = (myDate) => {
     return DateTime.fromISO(myDate)
         .setLocale('ru-RU')
-        .toLocaleString('datetimeFull')
+        .toLocaleString(DATETIME_MED)
 }
 
 
