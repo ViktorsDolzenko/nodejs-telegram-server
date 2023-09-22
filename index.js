@@ -30,6 +30,7 @@ bot.on('message', async (msg) => {
     if(text === '/weather') {
         await axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/5day/227285?apikey=GWz15QRQgUKBaAsPLhGdNnAikcCp69F1&language=ru-ru&metric=true').then((data)=> {
             console.log(data)
+            console.log(data.DailyForecasts.map((item) => item))
             bot.sendMessage(chatId, 'Погода в Vecumnieki', {
                 reply_markup: {
                   text: 'test'
