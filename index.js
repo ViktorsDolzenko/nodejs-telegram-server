@@ -13,6 +13,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+const getDate = (myDate) => {
+    const date = myDate.fromISO("2010-10-22T21:38:00", {locale: 'ru-RU'})
+    return date.toLocaleString(DateTime.DATETIME_MED);
+}
+
+
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const text = msg.text;
@@ -29,13 +36,8 @@ bot.on('message', async (msg) => {
 
     if(text === '/weather') {
         await axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/5day/227285?apikey=GWz15QRQgUKBaAsPLhGdNnAikcCp69F1&language=ru-ru&metric=true').then(({data})=> {
-            console.log(data)
-            console.log(data.DailyForecasts.map((item) => item))
-            bot.sendMessage(chatId, 'Погода в Vecumnieki', {
-                reply_markup: {
-                  text: 'test'
-                }
-            })
+
+            bot.sendMessage(chatId, `${data.DailyForecasts.map((item) => `${getDate(item.Date)}`).join('\n\n')}`)
         })
     }
 });
