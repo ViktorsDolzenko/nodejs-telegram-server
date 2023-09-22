@@ -36,7 +36,7 @@ bot.on('message', async (msg) => {
 
     if(text === '/weather') {
         await axios.get('http://dataservice.accuweather.com/forecasts/v1/daily/5day/227285?apikey=GWz15QRQgUKBaAsPLhGdNnAikcCp69F1&language=ru-ru&details=true&metric=true').then(({data})=> {
-            bot.sendMessage(chatId, `${data.DailyForecasts.map((item) => `${getDate(item.Date)}\n` + `Минимальная температура: ${item.Temperature.Minimum} °C\n` + `Максимальная температура: ${item.Temperature.Maximum} °C\n` + `День: ${item.Day.IconPhrase}, Ветер: ${item.Day.Wind.Speed.Value} mi/h \n` + `Ночь: ${item.Night.IconPhrase}, Ветер: ${item.Night.Wind.Speed.Value} mi/h\n`).join('\n\n\n\n\n')}`)
+            bot.sendMessage(chatId, `${data.DailyForecasts.map((item) => `${getDate(item.Date)}\n` + `Минимальная температура: ${item.Temperature.Minimum.Value} °C\n` + `Максимальная температура: ${item.Temperature.Maximum.Value} °C\n` + `День: ${item.Day.IconPhrase}, Ветер: ${item.Day.Wind.Speed.Value} km/h \n` + `Ночь: ${item.Night.IconPhrase}, Ветер: ${item.Night.Wind.Speed.Value} km/h\n`).join('\n\n\n')}`)
         })
     }
 });
